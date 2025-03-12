@@ -83,4 +83,12 @@ app.MapPut("/games/{id}", (Guid id, Game updatedGame) =>
     return Results.NoContent();
 });
 
+// DELETE // /games/122
+app.MapDelete("/games/{id}", (Guid id) =>
+{
+    games.RemoveAll(x => x.Id == id);
+
+    return Results.NoContent();
+});
+
 await app.RunAsync();

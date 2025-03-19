@@ -1,10 +1,6 @@
 using GameStore.API.Data;
-using GameStore.API.Features.Games.AddGame;
-using GameStore.API.Features.Games.DeleteGame;
-using GameStore.API.Features.Games.GetGame;
-using GameStore.API.Features.Games.GetGames;
-using GameStore.API.Features.Games.UpdateGame;
-using GameStore.API.Features.Genres.GetGenres;
+using GameStore.API.Features.Games;
+using GameStore.API.Features.Genres;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,11 +21,7 @@ if (app.Environment.IsDevelopment())
 
 GameStoreData data = new();
 
-app.MapGetGames(data);
-app.MapGetGame(data);
-app.MapAddGame(data);
-app.MapUpdateGame(data);
-app.MapDeleteGame(data);
-app.MapGetGenres(data);
+app.MapGames(data);
+app.MapGenres(data);
 
 await app.RunAsync();

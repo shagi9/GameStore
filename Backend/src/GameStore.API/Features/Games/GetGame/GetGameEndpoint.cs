@@ -6,13 +6,10 @@ namespace GameStore.API.Features.Games.GetGame
 {
     public static class GetGameEndpoint
     {
-        public static void MapGetGame(
-            this IEndpointRouteBuilder app,
-            GameStoreData data
-        )
+        public static void MapGetGame(this IEndpointRouteBuilder app)
         {
             // GET /games/id
-            app.MapGet("/{id}", (Guid id) => {
+            app.MapGet("/{id}", (Guid id, GameStoreData data) => {
                 Game? game = data.GetGame(id);
 
                 return game is null ? Results.NotFound(game) : Results.Ok(

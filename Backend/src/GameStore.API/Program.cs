@@ -4,6 +4,10 @@ using GameStore.API.Features.Genres;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// register services here
+builder.Services.AddTransient<GameDataLogger>();
+builder.Services.AddSingleton<GameStoreData>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -19,9 +23,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-GameStoreData data = new();
-
-app.MapGames(data);
-app.MapGenres(data);
+app.MapGames();
+app.MapGenres();
 
 await app.RunAsync();

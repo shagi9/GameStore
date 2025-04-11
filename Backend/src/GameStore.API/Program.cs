@@ -1,8 +1,12 @@
 using GameStore.API.Data;
 using GameStore.API.Features.Games;
 using GameStore.API.Features.Genres;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("GameStore");
+builder.Services.AddSqlite<GameStoreContext>(connectionString);
 
 // register services here
 builder.Services.AddTransient<GameDataLogger>();
@@ -25,5 +29,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapGames();
 app.MapGenres();
+// apply db migrations automatically when an application starts
+app.MigrateDb();
 
 await app.RunAsync();

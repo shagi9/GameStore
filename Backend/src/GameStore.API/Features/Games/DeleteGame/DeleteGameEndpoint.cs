@@ -1,4 +1,5 @@
 ﻿using GameStore.API.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.API.Features.Games.DeleteGame
 {
@@ -7,10 +8,12 @@ namespace GameStore.API.Features.Games.DeleteGame
         public static void MapDeleteGame(this IEndpointRouteBuilder app)
         {
             // DELETE // /games/122
-            app.MapDelete("/{id}", (Guid id, GameStoreData data) =>
+            app.MapDelete("/{id}", (Guid id, GameStoreContext dbContext) =>
             {
-                data.RemoveGame(id);
-
+                dbContext.Games
+                    .Where(x => x.Id == id)
+                    .ExecuteDelete();
+ 
                 return Results.NoContent();
             });
         }

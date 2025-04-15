@@ -1,5 +1,4 @@
-﻿using GameStore.API.Data;
-using GameStore.API.Features.Games.AddGame;
+﻿using GameStore.API.Features.Games.AddGame;
 using GameStore.API.Features.Games.DeleteGame;
 using GameStore.API.Features.Games.GetGame;
 using GameStore.API.Features.Games.GetGames;
